@@ -1,0 +1,179 @@
+#include<iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+double FindMedianScore(vector <int>&Score) {
+	sort(Score.begin(), Score.end()); 
+	int n = Score.size();
+	if (n % 2 == 0){
+		double first = Score[n / 2];
+		double second = Score[n / 2 - 1];
+		return ((first + second) / 2);
+      
+	}
+	else {
+		return Score[n / 2];
+	}
+}
+string CalculateLetterGrade(int total) {
+	if (total <= 180) {
+		return "fail";
+	}
+	if (total >= 181 && total <= 200) {
+		return "D-";
+	}
+	if (total >= 201 && total <= 220) {
+		return "D";
+	}
+	if (total >= 221 && total <= 240) {
+		return "D+";
+	}
+	if (total >= 241 && total <= 260) {
+		return "C-";
+	}
+	if (total >= 261 && total <= 280) {
+		return "C";
+	}
+	if (total >= 281 && total <= 300) {
+		return "C+";
+	}
+	if (total >= 301 && total <= 320) {
+		return "B-";
+	}
+	if (total >= 321 && total <= 340) {
+		return "B";
+	}
+	if (total >= 341 && total <= 360) {
+		return "B+";
+	}
+	if (total >= 361 && total <= 380) {
+		return "A-";
+	}
+	else if (total >= 381) {
+		return "A";
+	}
+}
+int main() {
+	int fir_Exam; 
+	int sec_Exam;
+	int fin_Exam;
+	int hw_Grade;
+	int total;
+	double median;
+	vector<int>Score;
+
+	cout << "Dr. DoLittle's Grading Program ....." << endl << endl;
+	cout << "Please enter in the score for the first exam: " << endl;
+	cin >> fir_Exam;
+	cout << endl;
+
+	while (true) {
+		if (cin.fail()) {
+			cout << "Sorry, your input must be an integer. Please try again." << endl;
+			cout << "Please enter in the score for the first exam: ";
+			cin.clear();
+			cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+			cin >> fir_Exam;
+			cout << endl;
+		}
+		if (fir_Exam < 0 || fir_Exam > 100 || cin.fail()) {
+			cout << "Sorry, your input must be between 0 and 100. Please try again." << endl;
+			cout << "Please enter in the score for the first exam: ";
+			cin.clear();
+			cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+			cin >> fir_Exam;
+			cout << endl;
+		}
+		else if (!cin.fail()) {
+			break;
+		}
+		break;
+	}
+
+	cout << "Please enter in the score for the second exam: " << endl;
+	cin >> sec_Exam;
+	cout << endl;
+	while (true) {
+		if (sec_Exam < 0 || sec_Exam > 100 || cin.fail()) {
+			cout << "Sorry, your input must be an integer. Please try again." << endl;
+			cout << "Please enter in the score for the second exam: ";
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize> ::max(), '\n');
+			cin >> sec_Exam;
+			cout << endl;
+		}
+		else if (!cin.fail()) {
+			break;
+		}
+		break;
+	}
+	
+
+	cout << "Please enter in the score for the final exam: " << endl; 
+	cin >> fin_Exam;
+	cout << endl;
+	while (true) {
+		if (fin_Exam < 0 || fin_Exam > 100 || cin.fail()) {
+			cout << "Sorry, your input must be an integer. Please try again." << endl;
+			cout << "Please enter in the score for the final exam: ";
+			cin.clear();
+			cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+			cin >> fin_Exam;
+			cout << endl;
+		}
+		else if (!cin.fail()) {
+			break;
+		}
+		break;
+	}
+
+	
+
+	cout << "Enter the score for a homework assignment: " << endl;
+	cin >> hw_Grade;
+	cout << endl;
+	while (true)  {
+		if (cin.fail()) {
+			cout<< "Sorry, your input must be an integer. Please try again." << endl;
+			cout << "Enter the score for a homework assignment: ";
+			cin.clear();
+			cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+			cin >> hw_Grade;
+			cout << endl;
+		}
+		
+		else if (hw_Grade == -1) {
+			break;
+		}
+		else if (hw_Grade < 0 || hw_Grade > 100 || cin.fail()) {
+			cout << "Sorry, your input must be between 0 and 100. Please try again." << endl;
+			cout << "Enter the score for a homework assignment: ";
+			cin.clear();
+			cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+			cin >> hw_Grade;
+			cout << endl;
+		}
+		
+		else {
+			Score.push_back(hw_Grade);
+			cout << "Enter the score for a homework assignment: "<< endl;
+			cin >> hw_Grade;
+			cout << endl;
+		}
+	
+	}
+	
+	
+	
+
+	median = FindMedianScore(Score);
+	total = fir_Exam + sec_Exam + fin_Exam + static_cast <int>(median) ;
+
+	cout << "The median homework score was " << median << endl;
+	cout << "The total points earned was " << total << endl;
+
+	cout << "The letter calculated letter grade is " << CalculateLetterGrade(total) << endl;
+
+
+
+}
